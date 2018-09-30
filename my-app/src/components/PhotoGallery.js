@@ -1,40 +1,63 @@
 import React, {Component} from 'react';
+import ReactCSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
+import PhotoDetailView from './PhotoDetailView';
+import leftArrow from '../img/left-arrow.svg';
+import rightArrow from '../img/right-arrow.svg';
 import './PhotoGallery.css';
 
 class PhotoGallery extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            detailView : false
+        }
     }
 
     render() {
 
-        let imgUrls = [
-            'https://source.unsplash.com/3Z70SDuYs5g/800x600',
-            'https://source.unsplash.com/01vFmYAOqQ0/800x600',
-            'https://source.unsplash.com/2Bjq3A7rGn4/800x600',
-            'https://source.unsplash.com/t20pc32VbrU/800x600'
-            ];
-
         return (
+            <div>
             <div className="photo-grid">
+
                 <div className="row">
                     <div className="col-md-6">
-                        <img className="image" src={imgUrls[0]} />
+                        <img className="image" src={this.props.images[0]} onClick={this.showDetail}/>
                     </div>
                     <div className="col-md-6">
-                        <img className="image" src={imgUrls[1]} />
+                        <img className="image" src={this.props.images[1]} onClick={this.showDetail}/>
                     </div>
+                </div>
+                <div className="row action-row">
+                    <div className="left-arrow" onClick={this.handleLeftClick}><img src={leftArrow}/></div>
+                    <div className="right-arrow" onClick={this.handleRightClick}><img src={rightArrow}/></div>
                 </div>
                 <div className="row">
                     <div className="col-md-6">
-                        <img className="image" src={imgUrls[2]} />
+                        <img className="image" src={this.props.images[2]} onClick={this.showDetail}/>
                     </div>
                     <div className="col-md-6">
-                        <img className="image" src={imgUrls[3]} />
+                        <img className="image" src={this.props.images[3]} onClick={this.showDetail}/>
                     </div>
                 </div>
             </div>
-        )
+                {this.state.detailView && <PhotoDetailView closeDetail={this.closeDetail}/> }
+            </div>
+                )
+    }
+
+    handleLeftClick = () => {
+    };
+
+    handleRightClick = () => {
+    };
+
+    showDetail = () => {
+        this.setState({detailView : true});
+    };
+
+    closeDetail = () => {
+        this.setState({detailView : false});
     }
 }
 
