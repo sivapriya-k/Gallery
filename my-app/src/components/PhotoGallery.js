@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import ReactCSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 import PhotoDetailView from './PhotoDetailView';
 import leftArrow from '../img/left-arrow.svg';
 import rightArrow from '../img/right-arrow.svg';
@@ -41,7 +40,7 @@ class PhotoGallery extends Component {
                     </div>
                 </div>
             </div>
-                {this.state.detailView && <PhotoDetailView closeDetail={this.closeDetail}/> }
+                {this.state.detailView && <PhotoDetailView closeDetail={this.closeDetail}/>}
             </div>
                 )
     }

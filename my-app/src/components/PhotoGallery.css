@@ -1,8 +1,9 @@
 .photo-grid {
-    margin: 100px 150px;
+    margin: 100px 250px;
 }
 
 .image {
+    height:200px;
     width: 100%;
     cursor: pointer;
 }
@@ -10,17 +11,6 @@
 .action-row {
     position: relative;
     height:20px;
-}
-
-.left-arrow {
-    margin-left:-40px;
-    position:absolute;
-}
-
-.right-arrow {
-    position: absolute;
-    right:10px;
-    margin-right: -40px;
 }
 
 .left-arrow ,
@@ -40,17 +30,14 @@
     width: 20px;
 }
 
-.background-enter {
-    transform: translate(100%);
+.left-arrow {
+    margin-left:-40px;
+    position:absolute;
 }
-.background-enter.background-enter-active {
-    transform: translate(0%);
-    transition: transform 1000ms ease-in-out;
+
+.right-arrow {
+    position: absolute;
+    right:10px;
+    margin-right: -40px;
 }
-.background-leave {
-    transform: translate(0%);
-}
-.background-leave.background-leave-active {
-    transform: translate(-100%);
-    transition: transform 1000ms ease-in-out;
-}
+
