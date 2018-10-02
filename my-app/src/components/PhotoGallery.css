@@ -17,11 +17,8 @@
 .right-arrow {
     background: #f9f9f9;
     margin-top:-20px;
-    height:50px;
     width: 30px;
-    display:flex;
     cursor:pointer;
-    justify-content: center;
 }
 
 .left-arrow > img,
@@ -41,3 +38,17 @@
     margin-right: -40px;
 }
 
+@media screen and (max-width: 768px) {
+    .photo-grid {
+        margin: 20px 50px;
+    }
+
+    .left-arrow {
+        margin-left: -30px;
+    }
+
+    .right-arrow {
+        margin-right: -30px;
+    }
+
+}

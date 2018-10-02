@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import './PhotoDetailView.css';
 import leftArrow from "../img/left-arrow.svg";
 import rightArrow from "../img/right-arrow.svg";
@@ -23,8 +24,9 @@ class PhotoDetailView extends Component {
                     <span className="img-caption">{this.props.images[this.state.currentIndex].caption}</span>
                 </div>
                 <div className="photo-nav">
-                    {this.state.currentIndex !== 0 && <div className="detail-left-arrow" onClick={this.handleLeftNav}><img src={leftArrow}/></div>}
-                    {this.state.currentIndex !== this.props.images.length-1 && <div className="detail-right-arrow" onClick={this.handleRightNav}><img src={rightArrow}/></div>}
+                    <div className="close">x</div>
+                    {this.state.currentIndex !== 0 && <div className="detail-left-arrow" onClick={this.handleLeftNav}><img src={leftArrow} alt="prev"/></div>}
+                    {this.state.currentIndex !== this.props.images.length-1 && <div className="detail-right-arrow" onClick={this.handleRightNav}><img src={rightArrow} alt="next"/></div>}
                 </div>
             </div>
         )
@@ -43,8 +45,17 @@ class PhotoDetailView extends Component {
         index = index + 1;
         this.setState({currentIndex : index});
     }
-
-
 }
+
+PhotoDetailView.defaultProps = {
+    images : [],
+    index : 0
+};
+
+PhotoDetailView.propTypes = {
+    images : PropTypes.array,
+    index : PropTypes.number
+};
+
 
 export default PhotoDetailView
