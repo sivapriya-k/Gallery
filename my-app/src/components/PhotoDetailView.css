@@ -21,4 +21,37 @@
     max-height: 70%;
     margin: auto;
     transition: background-image .3s ease-in-out;
+    background-size: cover;
+    background-position: center;
+}
+
+.img-caption {
+    color: #fff;
+    font-size:20px;
+    text-transform: capitalize;
+}
+
+.photo-nav {
+    position:relative;
+    height:100%
+}
+
+.detail-left-arrow {
+    position: absolute;
+    left: 10%;
+    height:60px;
+    width:30px;
+    top:46%;
+    background: #f9f9f9;
+    cursor:pointer;
+}
+
+.detail-right-arrow {
+    position: absolute;
+    right:6%;
+    height:60px;
+    width:30px;
+    top:46%;
+    background: #f9f9f9;
+    cursor: pointer;
 }

@@ -1,37 +1,46 @@
 import React, {Component} from 'react';
 import './PhotoDetailView.css';
+import leftArrow from "../img/left-arrow.svg";
+import rightArrow from "../img/right-arrow.svg";
 
 class PhotoDetailView extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            images : [
-                "https://source.unsplash.com/3Z70SDuYs5g/800x600",
-                'https://source.unsplash.com/t20pc32VbrU/800x600'
-            ],
-            currentIndex : 0
+            currentIndex : this.props.index
         }
     }
 
     render() {
         const styles = {
-            backgroundImage: `url(${this.state.images[this.state.currentIndex]})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center'
+            backgroundImage: `url(${this.props.images[this.state.currentIndex].url})`
         };
 
         return (
-            <div className="photo-detail-container" >
-                <div className="detail-view" style={styles}>caption</div>
-                <button type="button" onClick={this.changePhoto}>next</button>
+            <div className="photo-detail-container" onClick={this.props.closeDetail}>
+                <div className="detail-view" style={styles}>
+                    <span className="img-caption">{this.props.images[this.state.currentIndex].caption}</span>
+                </div>
+                <div className="photo-nav">
+                    {this.state.currentIndex !== 0 && <div className="detail-left-arrow" onClick={this.handleLeftNav}><img src={leftArrow}/></div>}
+                    {this.state.currentIndex !== this.props.images.length-1 && <div className="detail-right-arrow" onClick={this.handleRightNav}><img src={rightArrow}/></div>}
+                </div>
             </div>
         )
     }
 
-    changePhoto = () => {
+    handleLeftNav = (e) => {
+        e.stopPropagation();
         let index = this.state.currentIndex;
-        index = index === 0?1:0;
+        index = index - 1;
+        this.setState({currentIndex : index});
+    };
+
+    handleRightNav = (e) => {
+        e.stopPropagation();
+        let index = this.state.currentIndex;
+        index = index + 1;
         this.setState({currentIndex : index});
     }
 

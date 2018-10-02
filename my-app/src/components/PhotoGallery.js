@@ -9,50 +9,59 @@ class PhotoGallery extends Component {
         super(props);
 
         this.state = {
-            detailView : false
-        }
+            detailView : false,
+            indices : [0,1,2,3],
+            detailIndex : 0
+        };
+        this.totalImageCount = this.props.images.length;
     }
 
     render() {
 
         return (
             <div>
-            <div className="photo-grid">
+                <div className="photo-grid">
 
-                <div className="row">
-                    <div className="col-md-6">
-                        <img className="image" src={this.props.images[0]} onClick={this.showDetail}/>
+                    <div className="row">
+                        <div className="col-md-6">
+                            <img className="image" src={this.props.images[this.state.indices[0]].url} onClick={this.showDetail.bind(this,this.state.indices[0])}/>
+                        </div>
+                        <div className="col-md-6">
+                            <img className="image" src={this.props.images[this.state.indices[1]].url} onClick={this.showDetail.bind(this,this.state.indices[1])}/>
+                        </div>
                     </div>
-                    <div className="col-md-6">
-                        <img className="image" src={this.props.images[1]} onClick={this.showDetail}/>
+                    <div className="row action-row">
+                        {this.state.indices[0] !== 0 && <div className="left-arrow" onClick={this.handleLeftClick}><img src={leftArrow}/></div>}
+                        {this.state.indices[3] !== this.totalImageCount -1 && <div className="right-arrow" onClick={this.handleRightClick}><img src={rightArrow}/></div>}
+                    </div>
+                    <div className="row">
+                        <div className="col-md-6">
+                            <img className="image" src={this.props.images[this.state.indices[2]].url} onClick={this.showDetail.bind(this,this.state.indices[2])}/>
+                        </div>
+                        <div className="col-md-6">
+                            <img className="image" src={this.props.images[this.state.indices[3]].url} onClick={this.showDetail.bind(this,this.state.indices[3])}/>
+                        </div>
                     </div>
                 </div>
-                <div className="row action-row">
-                    <div className="left-arrow" onClick={this.handleLeftClick}><img src={leftArrow}/></div>
-                    <div className="right-arrow" onClick={this.handleRightClick}><img src={rightArrow}/></div>
-                </div>
-                <div className="row">
-                    <div className="col-md-6">
-                        <img className="image" src={this.props.images[2]} onClick={this.showDetail}/>
-                    </div>
-                    <div className="col-md-6">
-                        <img className="image" src={this.props.images[3]} onClick={this.showDetail}/>
-                    </div>
-                </div>
+                {this.state.detailView && <PhotoDetailView images={this.props.images} index={this.state.detailIndex} closeDetail={this.closeDetail}/>}
             </div>
-                {this.state.detailView && <PhotoDetailView closeDetail={this.closeDetail}/>}
-            </div>
-                )
+         )
     }
 
     handleLeftClick = () => {
+        let currentIndices = this.state.indices;
+        currentIndices = currentIndices.map(index => (index - 4) % this.totalImageCount);
+        this.setState({indices: currentIndices});
     };
 
     handleRightClick = () => {
+        let currentIndices = this.state.indices;
+        currentIndices = currentIndices.map(index => (index + 4) % this.totalImageCount);
+        this.setState({indices: currentIndices});
     };
 
-    showDetail = () => {
-        this.setState({detailView : true});
+    showDetail = (imageIndex) => {
+        this.setState({detailView : true, detailIndex: imageIndex});
     };
 
     closeDetail = () => {
